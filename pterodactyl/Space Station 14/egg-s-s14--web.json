@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-15T23:18:08+00:00",
+    "name": "SS14.Web",
+    "author": "ss14parkstation@gmail.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "Dotnet 6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin\/SS14.Web",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Content root path\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl unzip git\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-x64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nrm bin -r\r\nmkdir bin\r\n\r\ngit clone -b ${BRANCH} ${REPO} repo\r\nls\r\necho \"---cloned---\"\r\n\r\necho \"---going into repo---\"\r\ncd repo\r\necho \"---building repo---\"\r\ndotnet publish -c Release -r linux-x64 --no-self-contained\r\nls\r\n\r\necho \"---moving build---\"\r\nmv SS14.Web\/bin\/Release\/net6.0\/linux-x64\/publish\/* ..\/bin\r\nrm -r ..\/wwwroot\r\nmv ..\/bin\/wwwroot ..\/wwwroot\r\n\r\necho \"---removing repo---\"\r\ncd ..\r\nrm repo\/ -r\r\n\r\necho \"---configuring---\"\r\ntouch appsettings.Secret.yml\r\ntouch appsettings.yml\r\nchmod 755 bin\/SS14.Web\r\nls\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:8.0.101",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Repository",
+            "description": "",
+            "env_variable": "REPO",
+            "default_value": "https:\/\/github.com\/space-wizards\/SS14.Web",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "Branch",
+            "description": "",
+            "env_variable": "BRANCH",
+            "default_value": "master",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        }
+    ]
+}

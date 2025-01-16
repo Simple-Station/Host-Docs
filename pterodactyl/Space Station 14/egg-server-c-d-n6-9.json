@@ -1,0 +1,405 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-15T23:17:43+00:00",
+    "name": "Server CDN 6-9",
+    "author": "avesmaximus@gmail.com & ss14parkstation@gmail.com",
+    "description": "Space Station 14 tells the story of an ordinary shift on a space station gone wrong. Immerse yourself into your role, tinker with detailed systems, and survive the chaos in this round-based multiplayer role playing game.",
+    "features": null,
+    "docker_images": {
+        "Dotnet 9": "ghcr.io\/parkervcp\/yolks:dotnet_9",
+        "Dotnet 8": "ghcr.io\/parkervcp\/yolks:dotnet_8",
+        "Dotnet 7": "ghcr.io\/parkervcp\/yolks:dotnet_7",
+        "Dotnet 6": "ghcr.io\/parkervcp\/yolks:dotnet_6"
+    },
+    "file_denylist": [],
+    "startup": "export DOTNET_TieredPGO=1; export DOTNET_TC_QuickJitForLoops=1; export DOTNET_ReadyToRun=0; export ROBUST_NUMERICS_AVX=true; export PATH=$PATH:\/home\/container\/piper\/piper\/; .\/serverfiles\/Robust.Server --config-file datadir\/server_config.toml --data-dir datadir\/",
+    "config": {
+        "files": "{\r\n    \"datadir\/server_config.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"hostname\": \"hostname = \\\"{{server.build.env.ROBUST_CVAR_game__hostname}}\\\"\",\r\n            \"tickrate\": \"tickrate = {{server.build.env.ROBUST_CVAR_net__tickrate}}\",\r\n            \"portt\": \"port = {{server.build.default.port}}\",\r\n            \"soft_max_players\": \"soft_max_players = {{server.build.env.ROBUST_CVAR_game__soft_max_players}}\",\r\n            \"advertise\": \"advertise = {{server.build.env.ROBUST_CVAR_hub__advertise}}\",\r\n            \"discord\": \"discord = \\\"{{server.build.env.ROBUST_CVAR_infolinks__discord}}\\\"\",\r\n            \"wiki\": \"wiki = \\\"{{server.build.env.ROBUST_CVAR_infolinks__wiki}}\\\"\",\r\n            \"login_host_user\": \"login_host_user = \\\"{{server.build.env.ROBUST_CVAR_console__login_host_user}}\\\"\",\r\n            \"desc\": \"desc = \\\"{{server.build.env.ROBUST_CVAR_game__desc}}\\\"\",\r\n            \"hub_urls\": \"hub_urls = \\\"{{server.build.env.ROBUST_CVAR_hub__hub_urls}}\\\"\",\r\n            \"fork_id\": \"fork_id = \\\"{{server.build.env.ROBUST_CVAR_build__fork_id}}\\\"\",\r\n            \"panic_bunker.enable_without_admins\": \"panic_bunker.enable_without_admins = {{server.build.env.ROBUST_CVAR_game__panic_bunker__enable_without_admins}}\",\r\n            \"panic_bunker.disable_with_admins\": \"panic_bunker.disable_with_admins = {{server.build.env.ROBUST_CVAR_game__panic_bunker__disable_with_admins}}\",\r\n            \"panic_bunker.min_overall_hours\": \"panic_bunker.min_overall_hours = {{server.build.env.ROBUST_CVAR_game__panic_bunker__min_overall_hours}}\",\r\n            \"emergency_early_launch_allowed\": \"emergency_early_launch_allowed = {{server.build.env.ROBUST_CVAR_shuttle__emergency_early_launch_allowed}}\",\r\n            \"[worldgen]\\nenabled\": \"[worldgen]\\nenabled = {{server.build.env.ROBUST_CVAR_wordgen__enabled}}\",\r\n            \"enable_during_round\": \"enable_during_round = {{server.build.env.ROBUST_CVAR_ooc__enable_during_round}}\",\r\n            \"see_own_notes\": \"see_own_notes = {{server.build.env.ROBUST_CVAR_admin__see_own_notes}}\",\r\n            \"deadmin_on_join\": \"deadmin_on_join = {{server.build.env.ROBUST_CVAR_admin__deadmin_on_join}}\",\r\n            \"bypass_max_players\": \"bypass_max_players = {{server.build.env.ROBUST_CVAR_admin__bypass_max_players}}\",\r\n            \"tags\": \"tags = \\\"{{server.build.env.ROBUST_CVAR_hub__tags}}\\\"\",\r\n            \"forum\": \"forum = \\\"{{server.build.env.ROBUST_CVAR_infolinks__forum}}\\\"\",\r\n            \"github\": \"github = \\\"{{server.build.env.ROBUST_CVAR_infolinks__github}}\\\"\",\r\n            \"website\": \"website = \\\"{{server.build.env.ROBUST_CVAR_infolinks__website}}\\\"\",\r\n            \"bug_report\": \"bug_report = \\\"{{server.build.env.ROBUST_CVAR_infolinks__bug_report}}\\\"\",\r\n            \"appeal\": \"appeal = \\\"{{server.build.env.ROBUST_CVAR_infolinks__appeal}}\\\"\",\r\n            \"patreon\": \"patreon = \\\"{{server.build.env.ROBUST_CVAR_infolinks__patreon}}\\\"\",\r\n            \"bind\": \"bind = \\\"*:{{server.build.default.port}}\\\"\",\r\n            \"connectaddress\": \"connectaddress = \\\"udp:\/\/{{server.build.default.ip}}:{{server.build.default.port}}\\\"\",\r\n            \"engine\": \"engine = \\\"{{server.build.env.ROBUST_CVAR_database__engine}}\\\"\",\r\n            \"pg_host\": \"pg_host = \\\"{{server.build.env.ROBUST_CVAR_database__pg_host}}\\\"\",\r\n            \"pg_port\": \"pg_port = {{server.build.env.ROBUST_CVAR_database__pg_port}}\",\r\n            \"pg_database\": \"pg_database = \\\"{{server.build.env.ROBUST_CVAR_database__pg_database}}\\\"\",\r\n            \"pg_username\": \"pg_username = \\\"{{server.build.env.ROBUST_CVAR_database__pg_username}}\\\"\",\r\n            \"pg_password\": \"pg_password = \\\"{{server.build.env.ROBUST_CVAR_database__pg_password}}\\\"\",\r\n            \"server_name\": \"server_name = \\\"{{server.build.env.ROBUST_CVAR_adminlogs__server_name}}\\\"\",\r\n            \"[metrics]\\nenabled\": \"[metrics]\\nenabled = {{server.build.env.ROBUST_CVAR_metrics__enabled}}\",\r\n            \"porttt\": \"port = {{server.build.env.ROBUST_CVAR_metrics__port}}\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server Version\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/sh\r\napt update\r\napt -y install curl unzip wget\r\n\r\nARCH=$(uname -m)\r\ncase $ARCH in\r\n  x86_64)\r\n    ARCH=\"linux-x64\"\r\n  ;;\r\n  aarch64)\r\n    ARCH=\"linux-arm64\"\r\n  ;;\r\n  *)\r\n    ARCH=\"linux-arm64\"\r\n  ;;\r\nesac\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nmkdir datadir\r\nif [ ! -f datadir\/server_config.toml ]; then\r\n    cd datadir\r\n    wget https:\/\/raw.githubusercontent.com\/Simple-Station\/Host-Docs\/refs\/heads\/master\/server_config.toml\r\n    cd ..\r\nfi\r\n\r\nif [ ! -d piper ]; then\r\n    mkdir piper\r\n    cd piper\r\n    wget https:\/\/github.com\/rhasspy\/piper\/releases\/download\/2023.11.14-2\/piper_linux_x86_64.tar.gz\r\n    tar -xzvf piper_linux_x86_64.tar.gz\r\n    rm piper_linux_x86_64.tar.gz\r\n    cd ..\r\nfi\r\n\r\nrm -r serverfiles\r\nmkdir serverfiles\r\n#AUTH=\"${ROBUST_CVAR_build__fork_id}:${CDN_AUTH}\"\r\nAUTH=\"${ROBUST_CVAR_BUILD__FORK_ID}:${CDN_AUTH}\"\r\nif [ $(echo -n \"$BUILD_ID\" | wc -c) -lt 30 ]; then # if build_id is empty, get the latest build, this just hinges on the first sha1 being the latest one... good bet.\r\n  #BUILD_ID=$(curl -s https:\/\/${AUTH}@cdn.simplestation.org\/fork\/${ROBUST_CVAR_build__fork_id} | grep -Eo \"\\b[a-f0-9]{40}\\b\" | head -n 1)\r\n  BUILD_ID=$(curl -s https:\/\/${AUTH}@cdn.simplestation.org\/fork\/${ROBUST_CVAR_BUILD__FORK_ID} | grep -Eo \"\\b[a-f0-9]{40}\\b\" | head -n 1)\r\nfi\r\n#wget --user=$ROBUST_CVAR_build__fork_id --password=$CDN_AUTH http:\/\/cdn.simplestation.org\/fork\/${ROBUST_CVAR_build__fork_id}\/version\/${BUILD_ID}\/file\/SS14.Server_${ARCH}.zip\r\nwget --user=$ROBUST_CVAR_build__fork_id --password=$CDN_AUTH http:\/\/cdn.simplestation.org\/fork\/${ROBUST_CVAR_BUILD__FORK_ID}\/version\/${BUILD_ID}\/file\/SS14.Server_${ARCH}.zip\r\nmkdir serverfiles\r\ncd serverfiles\r\nunzip -q ..\/SS14.Server_${ARCH}.zip\r\nchmod 744 Robust.Server\r\ncd ..\r\nrm SS14.Server_${ARCH}.zip\r\n\r\necho \"-----------------------------------------\"\r\necho \"         Installation completed.         \"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:8-debian-11",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server Name",
+            "description": "The server hostname, shown in the status page or hub.",
+            "env_variable": "ROBUST_CVAR_game__hostname",
+            "default_value": "{\u00a7} SimpleStation Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:1024",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Tickrate",
+            "description": "The amount of \"frames\" the server tries to process every second.",
+            "env_variable": "ROBUST_CVAR_net__tickrate",
+            "default_value": "30",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:20,60",
+            "field_type": "text"
+        },
+        {
+            "name": "Max Players",
+            "description": "How many players can join at any time. Admins may ignore this if `admin.bypass_max_players` is true.",
+            "env_variable": "ROBUST_CVAR_game__soft_max_players",
+            "default_value": "48",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1",
+            "field_type": "text"
+        },
+        {
+            "name": "Public Server",
+            "description": "List server on public server list.",
+            "env_variable": "ROBUST_CVAR_hub__advertise",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Discord",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__discord",
+            "default_value": "https:\/\/discord.gg\/49KeKwXc8g",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Wiki",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__wiki",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Default Admin User",
+            "description": "Whoever's username is here gets full admin permissions on the server.",
+            "env_variable": "ROBUST_CVAR_console__login_host_user",
+            "default_value": "DEATHB4DEFEAT",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Description",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_game__desc",
+            "default_value": "SimpleStation server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:2048",
+            "field_type": "text"
+        },
+        {
+            "name": "Hub URLs",
+            "description": "Comma separated addresses for the hubs you want to list on.",
+            "env_variable": "ROBUST_CVAR_hub__hub_urls",
+            "default_value": "https:\/\/central.spacestation14.io\/hub\/,https:\/\/web.networkgamez.com",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Fork ID",
+            "description": "This is the fork that will be fetched from the CDN on installation.",
+            "env_variable": "ROBUST_CVAR_build__fork_id",
+            "default_value": "einstein-engines",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Build ID",
+            "description": "Installs a specific version of the specified fork from the CDN, or the latest if empty.",
+            "env_variable": "BUILD_ID",
+            "default_value": "empty",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "CDN Authentication",
+            "description": "Password to download private forks from the CDN, if any.\r\nThe username will always be `forkuser`.",
+            "env_variable": "CDN_AUTH",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Panic Bunker - Enable Without Admins",
+            "description": "Enables the panic bunker whenever there are no admins online.",
+            "env_variable": "ROBUST_CVAR_game__panic_bunker__enable_without_admins",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Panic Bunker - Disable With Admins",
+            "description": "Disabled the panic bunker whenever an admin joins",
+            "env_variable": "ROBUST_CVAR_game__panic_bunker__disable_with_admins",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Panic Bunker - Minimum Overall Time",
+            "description": "How much overall playtime in hours a player needs to join while the panic bunker is enabled.",
+            "env_variable": "ROBUST_CVAR_game__panic_bunker__min_overall_hours",
+            "default_value": "3",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:0",
+            "field_type": "text"
+        },
+        {
+            "name": "Emergency Early Shuttle Launch",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_shuttle__emergency_early_launch_allowed",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "World Generation",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_wordgen__enabled",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin \u2013 Players See Own Notes",
+            "description": "Lets players see their own public admin notes via the `adminremarks` command.",
+            "env_variable": "ROBUST_CVAR_admin__see_own_notes",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin \u2013 Deadmin Admins on Round Join",
+            "description": "Automatically runs the `deadmin` command whenever an admin joins the round.",
+            "env_variable": "ROBUST_CVAR_admin__deadmin_on_join",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Admin \u2013 Admins Bypass Max Players",
+            "description": "Allows admins to ignore the max player count when joining.",
+            "env_variable": "ROBUST_CVAR_admin__bypass_max_players",
+            "default_value": "1",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Server Tags",
+            "description": "Metadata for the launcher's hub filtering.",
+            "env_variable": "ROBUST_CVAR_hub__tags",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Forum",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__forum",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - GitHub",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__github",
+            "default_value": "https:\/\/github.com\/Simple-Station\/Einstein-Engines",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Website",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__website",
+            "default_value": "https:\/\/simplestation.org",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Bug Reports",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__bug_report",
+            "default_value": "https:\/\/github.com\/Simple-Station\/Einstein-Engines\/issues\/new",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Appeal",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__appeal",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Engine",
+            "description": "`sqlite` or `postgres`",
+            "env_variable": "ROBUST_CVAR_database__engine",
+            "default_value": "postgres",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Postgres Host",
+            "description": "URL to the PostgreSQL server.",
+            "env_variable": "ROBUST_CVAR_database__pg_host",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Postgres Port",
+            "description": "Port for the PostgreSQL server.",
+            "env_variable": "ROBUST_CVAR_database__pg_port",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1024",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Postgres Database Name",
+            "description": "Which \"database\" to select from the PostgreSQL server.",
+            "env_variable": "ROBUST_CVAR_database__pg_database",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Postgres Username",
+            "description": "Which user to connect to the PostgreSQL server as.",
+            "env_variable": "ROBUST_CVAR_database__pg_username",
+            "default_value": "pterodactyl",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Database - Postgres Password",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_database__pg_password",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Prometheus",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_metrics__enabled",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        },
+        {
+            "name": "Infolink - Patreon",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_infolinks__patreon",
+            "default_value": "https:\/\/patreon.com\/simple14",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:512",
+            "field_type": "text"
+        },
+        {
+            "name": "Adminlogs Server Name",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_adminlogs__server_name",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Prometheus Port",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_metrics__port",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|min:1024",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable OOC During the Round",
+            "description": "",
+            "env_variable": "ROBUST_CVAR_ooc__enable_during_round",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean",
+            "field_type": "text"
+        }
+    ]
+}

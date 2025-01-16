@@ -1,0 +1,31 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-15T23:19:03+00:00",
+    "name": "Prometheus",
+    "author": "avesmaximus@gmail.com",
+    "description": "gah",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:ubuntu": "ghcr.io\/parkervcp\/yolks:ubuntu"
+    },
+    "file_denylist": [],
+    "startup": ".\/prometheus --web.listen-address=0.0.0.0:${SERVER_PORT} --storage.tsdb.retention.size=50GB",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Starting Prometheus Server\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install python3 wget \r\n\r\nARCH=$(uname -m)\r\ncase $ARCH in\r\n  x86_64)\r\n    ARCH=\"linux-amd64\"\r\n  ;;\r\n  aarch64)\r\n    ARCH=\"linux-arm64\"\r\n  ;;\r\n  *)\r\n    ARCH=\"linux-amd64\"\r\n  ;;\r\nesac\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nwget https:\/\/github.com\/prometheus\/prometheus\/releases\/download\/v2.53.0\/prometheus-2.53.0.${ARCH}.tar.gz\r\ntar -xvzf prometheus-2.53.0.${ARCH}.tar.gz\r\ncd prometheus-2.53.0.${ARCH}\r\nmv * ..\r\n\r\nchmod 755 prometheus\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:8-debian-11",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}

@@ -1,0 +1,142 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-15T23:18:05+00:00",
+    "name": "Server ACZ 8",
+    "author": "avesmaximus@gmail.com",
+    "description": "Space Station 14 tells the story of an ordinary shift on a space station gone wrong. Immerse yourself into your role, tinker with detailed systems, and survive the chaos in this round-based multiplayer role playing game.",
+    "features": null,
+    "docker_images": {
+        "Dotnet 8": "ghcr.io\/parkervcp\/yolks:dotnet_8"
+    },
+    "file_denylist": [],
+    "startup": "export DOTNET_TieredPGO=1; export DOTNET_TC_QuickJitForLoops=1; export DOTNET_ReadyToRun=0; export ROBUST_NUMERICS_AVX=true; .\/serverfiles\/Robust.Server --config-file datadir\/server_config.toml --data-dir datadir\/",
+    "config": {
+        "files": "{\r\n    \"datadir\/server_config.toml\": {\r\n        \"parser\": \"file\",\r\n        \"find\": {\r\n            \"port\": \"port = {{server.build.default.port}}\",\r\n            \"hostname\": \"hostname = \\\"{{server.build.env.SERVER_NAME}}\\\"\",\r\n            \"tickrate\": \"tickrate = {{server.build.env.SERVER_TICK}}\",\r\n            \"soft_max_players\": \"soft_max_players = {{server.build.env.SERVER_MAX_PLAYERS}}\",\r\n            \"advertise\": \"advertise = {{server.build.env.ADVERTISE}}\",\r\n            \"server_url\": \"server_url = \\\"ss14:\/\/{{server.build.default.ip}}:{{server.build.default.port}}\\\"\",\r\n            \"discord\": \"discord = \\\"{{server.build.env.DISCORD}}\\\"\",\r\n            \"wiki\": \"wiki = \\\"{{server.build.env.WIKI}}\\\"\",\r\n            \"login_host_user\": \"login_host_user = \\\"{{server.build.env.ADMIN}}\\\"\",\r\n            \"desc\": \"desc = \\\"{{server.build.env.DESC}}\\\"\",\r\n            \"hub_urls\": \"hub_urls = \\\"{{server.build.env.HUB}}\\\"\"\r\n        }\r\n    }\r\n}",
+        "startup": "{\r\n    \"done\": \"Server Version\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl unzip git python3 git \r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-x64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nrm serverfiles -r\r\ngit clone -b ${BRANCH} ${GAME_REPO} repo && echo \"---cloned---\"\r\necho \"---going into directory---\"\r\nmkdir datadir\r\nmkdir serverfiles\r\ncd repo\/\r\necho \"---downloading engine---\"\r\npython3 RUN_THIS.py\r\necho \"---building repo---\"\r\ndotnet build Content.Packaging --configuration Release\r\n#dotnet build Content.Server --configuration Release\r\necho \"---building package---\"\r\ndotnet run --project Content.Packaging server --hybrid-acz --platform linux-x64\r\necho \"---building extracting server files---\"\r\nunzip release\/SS14.Server_linux-x64.zip -d \/mnt\/server\/serverfiles\r\n#echo \"---copying build---\"\r\n#cp bin\/Content.Server\/* \/mnt\/server\/serverfiles\r\ncd ..\/\r\necho \"---removing repo---\"\r\nrm repo\/ -r\r\nif [ ! -f datadir\/server_config.toml ]; then\r\n    curl http:\/\/168.119.12.160:4003\/raw\/vihiyiwele.makefile --output datadir\/server_config.toml\r\n    echo \"---no config file found, downloading template---\"\r\nfi\r\nchmod 755 serverfiles\/Robust.Server\r\n\r\n\r\n## install end\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:8-debian-11",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Server name",
+            "description": "The server hostname",
+            "env_variable": "SERVER_NAME",
+            "default_value": "MyServer",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:48",
+            "field_type": "text"
+        },
+        {
+            "name": "Server tickrate",
+            "description": "The tickrate of the server. Default is 30",
+            "env_variable": "SERVER_TICK",
+            "default_value": "25",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1,80",
+            "field_type": "text"
+        },
+        {
+            "name": "Max players",
+            "description": "",
+            "env_variable": "SERVER_MAX_PLAYERS",
+            "default_value": "64",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|numeric|between:1,256",
+            "field_type": "text"
+        },
+        {
+            "name": "Public server",
+            "description": "List server on public server list",
+            "env_variable": "ADVERTISE",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|boolean|",
+            "field_type": "text"
+        },
+        {
+            "name": "discord infolink",
+            "description": "adds discord to the server infolink",
+            "env_variable": "DISCORD",
+            "default_value": "https:\/\/discord.gg\/wNYWCjZzk2",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "wiki infolink",
+            "description": "adds wiki infolink",
+            "env_variable": "WIKI",
+            "default_value": "https:\/\/www.wikipedia.org\/",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "default admin user",
+            "description": "username put in here gets admin on the server",
+            "env_variable": "ADMIN",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "server description",
+            "description": "adds description to the server browser",
+            "env_variable": "DESC",
+            "default_value": "networkgamez server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "hub urls",
+            "description": "Comma seperated addresses for the hubs you want to list on.",
+            "env_variable": "HUB",
+            "default_value": "https:\/\/hub.spacestation14.com\/,https:\/\/web.networkgamez.com",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "branch repo",
+            "description": "",
+            "env_variable": "GAME_REPO",
+            "default_value": "https:\/\/github.com\/space-wizards\/space-station-14",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "Github branch",
+            "description": "this is the branch the build will pull from",
+            "env_variable": "BRANCH",
+            "default_value": "master",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        }
+    ]
+}

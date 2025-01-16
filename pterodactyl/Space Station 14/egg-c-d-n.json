@@ -1,0 +1,52 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2025-01-15T23:18:07+00:00",
+    "name": "CDN",
+    "author": "avesmaximus@gmail.com",
+    "description": null,
+    "features": null,
+    "docker_images": {
+        "Dotnet 8": "ghcr.io\/parkervcp\/yolks:dotnet_8"
+    },
+    "file_denylist": [],
+    "startup": ".\/bin\/Robust.Cdn",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"info\"\r\n}",
+        "logs": "{}",
+        "stop": "^SIGKILL"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\napt update\r\napt -y install curl unzip git\r\n\r\nARCH=$([[ \"$(uname -m)\" == \"x86_64\" ]] && echo \"linux-x64\" || echo \"linux-x64\")\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\nrm bin -r\r\nmkdir bin\r\ngit clone -b ${BRANCH} ${GAME_REPO} repo\r\nls\r\necho \"---cloned---\"\r\n\r\necho \"---going into repo---\"\r\ncd repo\r\necho \"---building repo---\"\r\ndotnet publish -c Release -r linux-x64 --no-self-contained\r\nls\r\n\r\necho \"---moving build---\"\r\nmv Robust.Cdn\/bin\/Release\/net8.0\/linux-x64\/publish\/* ..\/bin\r\n\r\necho \"---removing repo---\"\r\ncd ..\r\nrm repo\/ -r\r\n\r\necho \"---configuring---\"\r\n# if [ ! -f datadir\/server_config.toml ]; then\r\n#     curl http:\/\/168.119.12.160:4003\/raw\/vihiyiwele.makefile --output datadir\/server_config.toml\r\n#     echo \"---no config file found, downloading template---\"\r\n# fi\r\ntouch appsettings.json\r\nchmod 755 bin\/Robust.Cdn\r\nls\r\n\r\n\r\necho \"-----------------------------------------\"\r\necho \"Installation completed...\"\r\necho \"-----------------------------------------\"",
+            "container": "bitnami\/dotnet-sdk:8.0.101",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "branch repo",
+            "description": "",
+            "env_variable": "GAME_REPO",
+            "default_value": "https:\/\/github.com\/space-wizards\/Robust.Cdn",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": "string|max:256",
+            "field_type": "text"
+        },
+        {
+            "name": "Github branch",
+            "description": "this is the branch the build will pull from",
+            "env_variable": "BRANCH",
+            "default_value": "master",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        }
+    ]
+}
